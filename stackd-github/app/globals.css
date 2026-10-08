@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #050711;
+}
+
+body {
+  background: #050711;
+  color: #f6f8ff;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(104, 233, 255, 0.28);
+}
+
+:focus-visible {
+  outline: 2px solid #68e9ff;
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@layer components {
+  .panel {
+    @apply rounded-2xl border border-line bg-surface/70 shadow-panel backdrop-blur-xl;
+  }
+  .label {
+    @apply font-mono text-[10.5px] uppercase tracking-[0.18em] text-mute;
+  }
+  .btn {
+    @apply inline-flex select-none items-center justify-center gap-2 whitespace-nowrap rounded-[10px] px-4 py-2.5 font-display text-[11px] font-semibold uppercase tracking-[0.08em] transition duration-200 disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-primary {
+    @apply btn bg-gradient-to-br from-blue to-cyan text-ink hover:shadow-lift hover:brightness-110 active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply btn border border-line bg-snow/[0.03] text-snow hover:border-cyan/50 hover:bg-snow/[0.07] active:scale-[0.98];
+  }
+  .btn-icon {
+    @apply inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] border border-line bg-snow/[0.03] text-mute transition duration-200 hover:border-cyan/50 hover:text-snow disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .field {
+    @apply w-full rounded-[10px] border border-line bg-ink/60 px-3 py-2 text-sm text-snow outline-none transition placeholder:text-mute/60 focus:border-cyan/60;
+  }
+  .grad-text {
+    background: linear-gradient(100deg, #4285ff 0%, #68e9ff 55%, #b9f5ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+/* allocation slider: the fill follows --v (0-100) and --c (asset colour) */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 20px;
+  background: transparent;
+  cursor: pointer;
+}
+.slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--c) calc(var(--v) * 1%), rgba(149, 163, 195, 0.16) calc(var(--v) * 1%));
+}
+.slider::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--c) calc(var(--v) * 1%), rgba(149, 163, 195, 0.16) calc(var(--v) * 1%));
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -5px;
+  border-radius: 5px;
+  background: #f6f8ff;
+  box-shadow: 0 0 0 3px rgba(5, 7, 17, 0.9), 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+.slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 0;
+  border-radius: 5px;
+  background: #f6f8ff;
+  box-shadow: 0 0 0 3px rgba(5, 7, 17, 0.9);
+}
+
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(149, 163, 195, 0.25) transparent;
+}
+
+.grid-backdrop {
+  background-image: linear-gradient(rgba(149, 163, 195, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(149, 163, 195, 0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at center, #000 20%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 20%, transparent 72%);
+}
+
+@keyframes assemble {
+  0%,
+  100% {
+    transform: scale(0.94);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.assemble {
+  animation: assemble 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .assemble {
+    animation: none;
+  }
+}
